@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.blazc.fuelapp.R
 import com.blazc.fuelapp.databinding.ActivityMainBinding
-import com.blazc.fuelapp.databinding.FragmentFuelUpBinding
 import com.blazc.fuelapp.fragments.FuelUpFragment
 import com.blazc.fuelapp.fragments.HistoryFragment
 import com.blazc.fuelapp.fragments.HomeFragment
@@ -21,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         setBottomNavigation()
+        setSelectedMenu(0)
     }
 
     //region Bottom Navigation and Fragments
@@ -43,6 +43,10 @@ class MainActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(R.id.frameLayout, fragment)
             .commit()
+    }
+
+    fun setSelectedMenu(id: Int) {
+        binding.bottomNavigation.setSelected(id)
     }
     //endregion
 
