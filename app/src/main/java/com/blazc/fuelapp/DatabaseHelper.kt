@@ -23,7 +23,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     companion object {
         var DATABASE_VERSION = 1
-        const val DATABASE_NAME = "BeProductive.db"
+        const val DATABASE_NAME = "FuelUp.db"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
