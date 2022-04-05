@@ -14,7 +14,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 "PRICE_PER_UNIT FLOAT," +
                 "DATE TEXT," +
                 "IS_PARTIAL INT," +
-                "COMMENT TEXT)"
+                "COMMENT TEXT," +
+                "VEHICLE_ID INT)"
 
     private val CREATE_VEHICLE =
         "CREATE TABLE VEHICLE (" +
