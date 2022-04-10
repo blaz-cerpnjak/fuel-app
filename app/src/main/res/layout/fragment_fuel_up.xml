@@ -207,8 +207,7 @@
             android:gravity="end"
             android:layout_marginEnd="10dp"
             android:textSize="18sp"
-            android:textColor="@color/textColor"
-            android:hint="5.04.2022"/>
+            android:textColor="@color/textColor"/>
 
     </LinearLayout>
 
@@ -239,6 +238,16 @@
             android:textColor="@color/textColor"/>
 
     </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/cboxIsPartial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins"
+        android:text="Is partial fuel-ip"
+        android:textSize="16sp"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSave"
