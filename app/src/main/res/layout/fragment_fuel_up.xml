@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragments.FuelUpFragment">
 
     <TextView
@@ -17,4 +18,237 @@
         android:textColor="@color/textColor"
         android:textSize="24sp" />
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/poppins"
+            android:textSize="16sp"
+            android:layout_marginEnd="10dp"
+            android:text="Current Odometer"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etOdometer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins"
+            android:gravity="end"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/textColor"
+            android:inputType="number"
+            android:background="@android:color/transparent"
+            android:hint="175000"/>
+
+        <TextView
+            android:id="@+id/txtDistanceUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/poppins"
+            android:textSize="16sp"
+            android:text="km"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/poppins"
+            android:textSize="16sp"
+            android:layout_marginEnd="10dp"
+            android:text="Fuel amount"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etFuelAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins"
+            android:gravity="end"
+            android:inputType="numberDecimal"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/textColor"
+            android:background="@android:color/transparent"
+            android:hint="0,00"/>
+
+        <TextView
+            android:id="@+id/txtFuelAmountUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/poppins"
+            android:textSize="16sp"
+            android:text="L"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/poppins"
+            android:textSize="16sp"
+            android:layout_marginEnd="10dp"
+            android:text="Price"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etPricePerLiter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins"
+            android:gravity="end"
+            android:inputType="numberDecimal"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/textColor"
+            android:background="@android:color/transparent"
+            android:hint="0,00"/>
+
+        <TextView
+            android:id="@+id/txtPricerPerUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/poppins"
+            android:textSize="16sp"
+            android:text="€ per L"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/poppins"
+            android:textSize="16sp"
+            android:layout_marginEnd="10dp"
+            android:text="Total amount"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etTotalAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins"
+            android:gravity="end"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/textColor"
+            android:background="@android:color/transparent"
+            android:hint="0,00"/>
+
+        <TextView
+            android:id="@+id/txtCurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/poppins"
+            android:textSize="16sp"
+            android:text="€"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/poppins"
+            android:textSize="16sp"
+            android:layout_marginEnd="10dp"
+            android:text="Date"/>
+
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins"
+            android:gravity="end"
+            android:layout_marginEnd="10dp"
+            android:textSize="18sp"
+            android:textColor="@color/textColor"
+            android:hint="5.04.2022"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/poppins"
+            android:textSize="16sp"
+            android:layout_marginEnd="10dp"
+            android:text="Comment"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:gravity="start"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/textColor"/>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="Save"
+        android:background="@color/blue"
+        android:textColor="@color/white"/>
+
+</LinearLayout>
