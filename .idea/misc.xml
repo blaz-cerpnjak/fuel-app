@@ -3,13 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/blaz0/OneDrive/Namizje/Drugo/AndroidStudioProjects/FuelApp/app/src/main/res/layout/activity_main.xml" value="0.4" />
-        <entry key="..\:/Users/blaz0/OneDrive/Namizje/Drugo/AndroidStudioProjects/FuelApp/app/src/main/res/layout/fragment_fuel_up.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/blaz0/OneDrive/Namizje/Drugo/AndroidStudioProjects/FuelApp/app/src/main/res/layout/activity_main.xml" value="0.18568840579710144" />
         <entry key="..\:/Users/blaz0/OneDrive/Namizje/Drugo/AndroidStudioProjects/FuelApp/app/src/main/res/layout/fragment_home.xml" value="0.264" />
-        <entry key="..\:/Users/blaz0/OneDrive/Namizje/Drugo/AndroidStudioProjects/FuelApp/app/src/main/res/menu/navigation.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/nsimi/AndroidStudioProjects/fuel-app/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_fuel_up.xml" value="0.32708333333333334" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3265625" />
+        <entry key="app/src/main/res/layout/fuelup_item.xml" value="0.32708333333333334" />
       </map>
     </option>
   </component>
