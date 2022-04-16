@@ -3,7 +3,6 @@ package com.blazc.fuelapp.fragments
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -46,7 +45,7 @@ class FuelUpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         mainActivity = activity as MainActivity
         mydb = DatabaseHelper(mainActivity)
-        setCurrentDate();
+        setCurrentDate()
         etPriceListener()
         btnSaveOnClick()
     }
@@ -166,9 +165,9 @@ class FuelUpFragment : Fragment() {
             isPartial(),
         )
         if (mydb.insertFuelUp(fuelUp) > 0)
-            MyToast.showError(mainActivity, "Error", "Fuel up was saved.")
+            MyToast.showSuccess(mainActivity, "Success", "Fuel up was saved.")
         else
-            MyToast.showSuccess(mainActivity, "Success", "Fuel up was not saved.")
+            MyToast.showError(mainActivity, "Error", "Fuel up was not saved.")
     }
     //endregion
 }
