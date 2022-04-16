@@ -1,5 +1,6 @@
 package com.blazc.fuelapp
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -41,7 +42,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         TODO("Not yet implemented")
     }
 
-    //region Vehicle
     fun insertVehicle(name: String): Long {
         val db = writableDatabase
         val values = ContentValues().apply {
@@ -49,9 +49,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
         return db.insert(VEHICLE, null, values) // returns row id
     }
-    //endregion
 
-    //region FuelUp
     fun insertFuelUp(fuelUp: FuelUp): Long {
         val db = writableDatabase
         val values = ContentValues().apply {
@@ -65,5 +63,55 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
         return db.insert(FUEL_UP, null, values) // returns row id
     }
-    //endregion
+
+    @SuppressLint("Range")
+    fun getFuelUp(id: Int): FuelUp? {
+        var fuelUp: FuelUp? = null
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $FUEL_UP WHERE ID = ?", arrayOf(id.toString()))
+        cursor.moveToFirst()
+        while (!cursor.isAfterLast) {
+            val id = cursor.getInt(cursor.getColumnIndex("ID"))
+            val odometer = cursor.getInt(cursor.getColumnIndex("CURRENT_ODOMETER"))
+            val fuelAmount = cursor.getFloat(cursor.getColumnIndex("FUEL_AMOUNT"))
+            val pricePerUnit = cursor.getFloat(cursor.getColumnIndex("PRICE_PER_UNIT"))
+            val date = cursor.getString(cursor.getColumnIndex("DATE"))
+            val isPartial = cursor.getInt(cursor.getColumnIndex("IS_PARTIAL"))
+            val comment = cursor.getString(cursor.getColumnIndex("COMMENT"))
+            val vehicleID = cursor.getInt(cursor.getColumnIndex("VEHICLE_ID"))
+            fuelUp = FuelUp(odometer, fuelAmount, pricePerUnit, date, comment, isPartial, vehicleID, id)
+            cursor.moveToNext()
+        }
+        cursor.close()
+        return fuelUp
+    }
+
+    @SuppressLint("Range")
+    fun getFuelUps(): List<FuelUp> {
+        val fuelUpList = mutableListOf<FuelUp>()
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $FUEL_UP", null)
+        cursor.moveToFirst()
+        while (!cursor.isAfterLast) {
+            val id = cursor.getInt(cursor.getColumnIndex("ID"))
+            val odometer = cursor.getInt(cursor.getColumnIndex("CURRENT_ODOMETER"))
+            val fuelAmount = cursor.getFloat(cursor.getColumnIndex("FUEL_AMOUNT"))
+            val pricePerUnit = cursor.getFloat(cursor.getColumnIndex("PRICE_PER_UNIT"))
+            val date = cursor.getString(cursor.getColumnIndex("DATE"))
+            val isPartial = cursor.getInt(cursor.getColumnIndex("IS_PARTIAL"))
+            val comment = cursor.getString(cursor.getColumnIndex("COMMENT"))
+            val vehicleID = cursor.getInt(cursor.getColumnIndex("VEHICLE_ID"))
+            fuelUpList.add(FuelUp(odometer, fuelAmount, pricePerUnit, date, comment, isPartial, vehicleID, id))
+            cursor.moveToNext()
+        }
+        cursor.close()
+        return fuelUpList
+    }
+
+    fun deleteFuelUp(id: Int): Int {
+        val db = writableDatabase
+        val selection = "ID LIKE ?"
+        val selectionArgs = arrayOf(id.toString())
+        return db.delete(FUEL_UP, selection, selectionArgs) // returns deleted rows
+    }
 }
