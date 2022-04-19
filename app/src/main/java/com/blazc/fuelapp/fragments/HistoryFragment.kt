@@ -45,7 +45,7 @@ class HistoryFragment : Fragment() {
         binding.recyclerViewFuelUps.adapter = fuelUpAdapter
         fuelUpAdapter.setOnItemClickListener(object : FuelUpAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                Toast.makeText(mainActivity, position.toString(), Toast.LENGTH_SHORT).show()
+                mainActivity.loadFragment(FuelUpFragment(fuelUpList[position].ID, true))
             }
         })
     }

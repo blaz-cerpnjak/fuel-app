@@ -7,22 +7,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import com.blazc.fuelapp.DatabaseHelper
+import com.blazc.fuelapp.R
 import com.blazc.fuelapp.activities.MainActivity
 import com.blazc.fuelapp.databinding.FragmentFuelUpBinding
 import com.blazc.fuelapp.helper.FuelUp
 import com.blazc.fuelapp.helper.MyToast
 import java.lang.Exception
-import java.math.BigDecimal
-import java.math.RoundingMode
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import kotlin.math.roundToInt
 
-class FuelUpFragment : Fragment() {
+class FuelUpFragment(val fuelUpID: Int = -1, val isUpdate: Boolean = false) : Fragment() {
     private var _binding: FragmentFuelUpBinding? = null
     private val binding get() = _binding!!
     private lateinit var mainActivity: MainActivity
@@ -45,6 +43,10 @@ class FuelUpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         mainActivity = activity as MainActivity
         mydb = DatabaseHelper(mainActivity)
+        if (isUpdate && fuelUpID > 0) {
+            binding.btnSave.text = getString(R.string.update)
+            populateDate(fuelUpID)
+        }
         setCurrentDate()
         etPriceListener()
         btnSaveOnClick()
@@ -163,11 +165,37 @@ class FuelUpFragment : Fragment() {
             LocalDateTime.now().toString(),
             binding.etComment.text.toString(),
             isPartial(),
+            -1, // carID (todo)
+            fuelUpID
         )
-        if (mydb.insertFuelUp(fuelUp) > 0)
-            MyToast.showSuccess(mainActivity, "Success", "Fuel up was saved.")
-        else
-            MyToast.showError(mainActivity, "Error", "Fuel up was not saved.")
+        if (isUpdate) {
+            if (mydb.updateFuelUp(fuelUp) > 0)
+                MyToast.showSuccess(mainActivity, "Success", "Fuel up was updated.")
+            else
+                MyToast.showError(mainActivity, "Error", "Fuel up was not updated.")
+        } else {
+            if (mydb.insertFuelUp(fuelUp) > 0)
+                MyToast.showSuccess(mainActivity, "Success", "Fuel up was saved.")
+            else
+                MyToast.showError(mainActivity, "Error", "Fuel up was not saved.")
+        }
+    }
+    //endregion
+
+    //region Update
+    private fun populateDate(fuelUpID: Int) {
+        val fuelUp = mydb.getFuelUp(fuelUpID)
+        if (fuelUp != null) {
+            binding.etOdometer.setText(fuelUp.odometer.toString())
+            binding.etFuelAmount.setText(fuelUp.fuelAmount.toString())
+            binding.etPricePerLiter.setText(fuelUp.pricePerUnit.toString())
+            binding.etTotalAmount.setText(fuelUp.calculateTotalAmount().toString())
+            binding.txtDate.setText(fuelUp.formatInputDate())
+            binding.etComment.setText(fuelUp.comment)
+            binding.cboxIsPartial.isChecked = fuelUp.isPartial == 1
+        } else {
+            MyToast.showWarning(mainActivity, "Oops", "Fuel up not found.")
+        }
     }
     //endregion
 }

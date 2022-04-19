@@ -246,6 +246,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/poppins"
+        android:buttonTint="@color/blue"
         android:text="Is partial fuel-ip"
         android:textSize="16sp"/>
 

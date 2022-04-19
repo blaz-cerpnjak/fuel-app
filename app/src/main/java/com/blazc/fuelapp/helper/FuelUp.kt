@@ -11,7 +11,7 @@ class FuelUp (var odometer: Int, var fuelAmount: Float, var pricePerUnit: Float,
               var inputDate: String, var comment: String, var isPartial: Int,
               var vehicleID: Int = -1, var ID: Int = -1) {
 
-    fun calculatePrice(): Float {
+    fun calculateTotalAmount(): Float {
         var totalAmount = fuelAmount * pricePerUnit
         totalAmount = ((totalAmount * 100.0).roundToInt() / 100.0).toFloat()
         return totalAmount

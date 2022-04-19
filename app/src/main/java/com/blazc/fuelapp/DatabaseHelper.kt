@@ -114,4 +114,26 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val selectionArgs = arrayOf(id.toString())
         return db.delete(FUEL_UP, selection, selectionArgs) // returns deleted rows
     }
+
+    fun updateFuelUp(fuelUp: FuelUp): Int {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put("CURRENT_ODOMETER", fuelUp.odometer)
+            put("FUEL_AMOUNT", fuelUp.fuelAmount)
+            put("PRICE_PER_UNIT", fuelUp.pricePerUnit)
+            put("DATE", fuelUp.inputDate)
+            put("IS_PARTIAL", fuelUp.isPartial)
+            put("COMMENT", fuelUp.comment)
+            put("VEHICLE_ID", fuelUp.vehicleID)
+        }
+        val selection = "ID LIKE ?"
+        val selectionArgs = arrayOf(fuelUp.ID.toString())
+        val count = db.update(
+            FUEL_UP,
+            values,
+            selection,
+            selectionArgs
+        )
+        return count // returns number of rows affected
+    }
 }

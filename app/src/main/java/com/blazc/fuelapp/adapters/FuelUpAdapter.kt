@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.blazc.fuelapp.R
 import com.blazc.fuelapp.helper.FuelUp
-import java.util.*
 
 class FuelUpAdapter(private val context: Context,
                     listFuelUps: List<FuelUp>): RecyclerView.Adapter<FuelUpAdapter.ViewHolder>() {
@@ -54,7 +53,7 @@ class FuelUpAdapter(private val context: Context,
         holder.txtDistance.text = "Todo"
         holder.txtOdometer.text = fuelUp.odometer.toString()
         holder.txtDate.text = fuelUp.formatInputDate()
-        holder.txtPrice.text = "${fuelUp.calculatePrice()} ${fuelUp.getCurrency()}"
+        holder.txtPrice.text = "${fuelUp.calculateTotalAmount()} ${fuelUp.getCurrency()}"
         holder.imgFuelUp.setImageResource(R.drawable.fuel_up)
     }
 
