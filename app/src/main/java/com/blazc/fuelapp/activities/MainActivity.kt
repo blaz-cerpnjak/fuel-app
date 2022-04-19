@@ -2,6 +2,7 @@ package com.blazc.fuelapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.blazc.fuelapp.DatabaseHelper
 import com.blazc.fuelapp.R
@@ -10,6 +11,7 @@ import com.blazc.fuelapp.fragments.FuelUpFragment
 import com.blazc.fuelapp.fragments.HistoryFragment
 import com.blazc.fuelapp.fragments.HomeFragment
 import io.ak1.OnBubbleClickListener
+import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -52,4 +54,7 @@ class MainActivity : AppCompatActivity() {
     }
     //endregion
 
+    //region Calculations
+
+    //endregion
 }

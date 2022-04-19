@@ -38,7 +38,7 @@ class HistoryFragment : Fragment() {
     }
 
     private fun setRecyclerViewFuelUps() {
-        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true)
         binding.recyclerViewFuelUps.layoutManager = linearLayoutManager
         val fuelUpList = getFuelUpList()
         fuelUpAdapter = FuelUpAdapter(mainActivity, fuelUpList)
