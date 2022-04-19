@@ -55,6 +55,36 @@ class MainActivity : AppCompatActivity() {
     //endregion
 
     //region Calculations
+    fun totalAverageConsumption(): Float {
+        val fuelUps = mydb.getFuelUps().sortedByDescending { it.ID }
 
+        if (fuelUps.size < 2)
+            return 0f
+
+        var counter = 1
+        var totalDrivenDistance = 0
+        var fuelAmount = 0f
+        var lastOdometer = fuelUps[0].odometer
+        var drivenDistance = 0
+        var partialConsumption = 0f
+
+        for (i in 1 until fuelUps.size) {
+            if (fuelUps[i].isPartial != 1) {
+                counter++
+                fuelAmount += fuelUps[i].fuelAmount
+                drivenDistance = lastOdometer - fuelUps[i].odometer
+                totalDrivenDistance += drivenDistance
+                lastOdometer = fuelUps[i].odometer
+                partialConsumption = totalDrivenDistance / fuelAmount
+            }
+        }
+
+        if (fuelAmount <= 0)
+            return 0f
+
+        val avgConsumption = partialConsumption / counter
+
+        return ((avgConsumption * 100.0).roundToInt() / 100.0).toFloat()
+    }
     //endregion
 }
