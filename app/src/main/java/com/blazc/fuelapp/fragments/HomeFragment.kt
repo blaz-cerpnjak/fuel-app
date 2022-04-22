@@ -34,4 +34,14 @@ class HomeFragment : Fragment() {
         mainActivity = activity as MainActivity
         mydb = DatabaseHelper(mainActivity)
     }
+
+    fun getCurrentMonthsExpenses(): Float {
+        val fuelUps = mydb.getCurrentMonthsFuelUps()
+        var sum = 0f
+        for (fuelUp in fuelUps) {
+            sum += fuelUp.calculateTotalAmount()
+        }
+        return ((sum * 100.0).roundToInt() / 100.0).toFloat()
+    }
+
 }
