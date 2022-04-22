@@ -141,6 +141,32 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     @SuppressLint("Range")
+    fun getCurrentMonthsDistance(): Int {
+        var distance = 0
+        var lastOdometer: Int? = null
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $FUEL_UP", null)
+        cursor.moveToFirst()
+        while (!cursor.isAfterLast) {
+            val date = cursor.getString(cursor.getColumnIndex("DATE"))
+            val dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+            val parsedDate = LocalDate.parse(date, dtf)
+
+            if (parsedDate.monthValue == LocalDate.now().monthValue && parsedDate.year == LocalDate.now().year) {
+                val odometer = cursor.getInt(cursor.getColumnIndex("CURRENT_ODOMETER"))
+                if (lastOdometer != null) {
+                    distance += (odometer - lastOdometer)
+                }
+                lastOdometer = odometer
+            }
+
+            cursor.moveToNext()
+        }
+        cursor.close()
+        return distance
+    }
+
+    @SuppressLint("Range")
     fun getCurrentMonthsFuelUps(): List<FuelUp> {
         val fuelUpList = mutableListOf<FuelUp>()
         val db = readableDatabase

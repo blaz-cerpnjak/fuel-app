@@ -61,7 +61,7 @@
                     android:fontFamily="@font/poppins_semibold"
                     android:text="6.5"
                     android:textColor="@color/blue"
-                    android:textSize="35sp" />
+                    android:textSize="30sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -114,7 +114,7 @@
                     android:fontFamily="@font/poppins_semibold"
                     android:text="0,08 €"
                     android:textColor="@color/blue"
-                    android:textSize="35sp" />
+                    android:textSize="30sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -168,6 +168,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/txtDistance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
@@ -176,7 +177,7 @@
                     android:fontFamily="@font/poppins_semibold"
                     android:text="500"
                     android:textColor="@color/blue"
-                    android:textSize="35sp" />
+                    android:textSize="30sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -230,7 +231,7 @@
                     android:fontFamily="@font/poppins_semibold"
                     android:text="60 €"
                     android:textColor="@color/blue"
-                    android:textSize="35sp" />
+                    android:textSize="30sp" />
 
                 <TextView
                     android:layout_width="match_parent"

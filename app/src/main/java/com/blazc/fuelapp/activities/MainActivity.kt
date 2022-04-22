@@ -11,6 +11,7 @@ import com.blazc.fuelapp.fragments.FuelUpFragment
 import com.blazc.fuelapp.fragments.HistoryFragment
 import com.blazc.fuelapp.fragments.HomeFragment
 import io.ak1.OnBubbleClickListener
+import java.util.*
 import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
@@ -53,6 +54,10 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setSelected(id)
     }
     //endregion
+
+    fun getCurrency(): String {
+        return Currency.getInstance(Locale.getDefault()).getSymbol(Locale.getDefault())
+    }
 
     //region Calculations
     fun totalAverageConsumption(): Float {

@@ -33,10 +33,14 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         mainActivity = activity as MainActivity
         mydb = DatabaseHelper(mainActivity)
+        binding.txtMonthlyExpenses.text = "${getCurrentMonthsExpenses()} ${mainActivity.getCurrency()}"
+        binding.txtDistance.text = mydb.getCurrentMonthsDistance().toString()
     }
 
     fun getCurrentMonthsExpenses(): Float {
         val fuelUps = mydb.getCurrentMonthsFuelUps()
+        if (fuelUps.isEmpty())
+            return 0f
         var sum = 0f
         for (fuelUp in fuelUps) {
             sum += fuelUp.calculateTotalAmount()
