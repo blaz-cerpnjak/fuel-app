@@ -6,6 +6,9 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.blazc.fuelapp.helper.FuelUp
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 private const val FUEL_UP = "FUEL_UP"
 private const val VEHICLE = "VEHICLE"
@@ -136,4 +139,34 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         )
         return count // returns number of rows affected
     }
+
+    @SuppressLint("Range")
+    fun getCurrentMonthsFuelUps(): List<FuelUp> {
+        val fuelUpList = mutableListOf<FuelUp>()
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $FUEL_UP", null)
+        cursor.moveToFirst()
+        while (!cursor.isAfterLast) {
+            val date = cursor.getString(cursor.getColumnIndex("DATE"))
+            val dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+            val parsedDate = LocalDate.parse(date, dtf)
+
+            if (parsedDate.monthValue == LocalDate.now().monthValue && parsedDate.year == LocalDate.now().year) {
+                val id = cursor.getInt(cursor.getColumnIndex("ID"))
+                val odometer = cursor.getInt(cursor.getColumnIndex("CURRENT_ODOMETER"))
+                val fuelAmount = cursor.getFloat(cursor.getColumnIndex("FUEL_AMOUNT"))
+                val pricePerUnit = cursor.getFloat(cursor.getColumnIndex("PRICE_PER_UNIT"))
+                val isPartial = cursor.getInt(cursor.getColumnIndex("IS_PARTIAL"))
+                val comment = cursor.getString(cursor.getColumnIndex("COMMENT"))
+                val vehicleID = cursor.getInt(cursor.getColumnIndex("VEHICLE_ID"))
+
+                fuelUpList.add(FuelUp(odometer, fuelAmount, pricePerUnit, date, comment, isPartial, vehicleID, id))
+            }
+
+            cursor.moveToNext()
+        }
+        cursor.close()
+        return fuelUpList
+    }
+
 }
