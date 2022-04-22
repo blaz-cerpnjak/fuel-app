@@ -44,8 +44,10 @@ class FuelUpFragment(val fuelUpID: Int = -1, val isUpdate: Boolean = false) : Fr
         mainActivity = activity as MainActivity
         mydb = DatabaseHelper(mainActivity)
         if (isUpdate && fuelUpID > 0) {
+            binding.btnRemove.visibility = View.VISIBLE
             binding.btnSave.text = getString(R.string.update)
             populateDate(fuelUpID)
+            btnRemoveOnClick()
         }
         setCurrentDate()
         etPriceListener()
@@ -112,6 +114,13 @@ class FuelUpFragment(val fuelUpID: Int = -1, val isUpdate: Boolean = false) : Fr
     //endregion
 
     //region Buttons
+    private fun btnRemoveOnClick() {
+        binding.btnRemove.setOnClickListener {
+            removeFuelUp(fuelUpID)
+            mainActivity.loadFragment(HistoryFragment())
+        }
+    }
+
     private fun btnSaveOnClick() {
         binding.btnSave.setOnClickListener {
             if (checkOdometer() && checkFuelAmount() && checkPrice() && checkTotalAmount())
@@ -151,6 +160,14 @@ class FuelUpFragment(val fuelUpID: Int = -1, val isUpdate: Boolean = false) : Fr
     //endregion
 
     //region Database
+    private fun removeFuelUp(id: Int) {
+        if (mydb.deleteFuelUp(id) > 0) {
+            MyToast.showSuccess(mainActivity, "Success", "Fuel up was deleted.")
+        } else {
+            MyToast.showError(mainActivity, "Error", "Fuel up was not deleted.")
+        }
+    }
+
     private fun isPartial(): Int {
         if (binding.cboxIsPartial.isChecked)
             return 1
