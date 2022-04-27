@@ -182,6 +182,7 @@ class FuelUpFragment(val fuelUpID: Int = -1, val isUpdate: Boolean = false) : Fr
             LocalDateTime.now().toString(),
             binding.etComment.text.toString(),
             isPartial(),
+            0f,
             -1, // carID (todo)
             fuelUpID
         )

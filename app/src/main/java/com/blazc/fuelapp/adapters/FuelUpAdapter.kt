@@ -29,7 +29,7 @@ class FuelUpAdapter(private val context: Context,
     class ViewHolder(itemView: View, listener: OnItemClickListener) : RecyclerView.ViewHolder(itemView) {
         val txtOdometer = itemView.findViewById<TextView>(R.id.txtOdometer)
         val txtPrice = itemView.findViewById<TextView>(R.id.txtPrice)
-        val txtDistance = itemView.findViewById<TextView>(R.id.txtDistance)
+        val txtConsumption = itemView.findViewById<TextView>(R.id.txtConsumption)
         val txtDate = itemView.findViewById<TextView>(R.id.txtDate)
         val imgFuelUp = itemView.findViewById<ImageView>(R.id.imgFuelUp)
 
@@ -50,7 +50,7 @@ class FuelUpAdapter(private val context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val fuelUp: FuelUp = listFuelUps[position]
 
-        holder.txtDistance.text = "Todo"
+        holder.txtConsumption.text = fuelUp.avgConsumption.toString() + " L/100km"
         holder.txtOdometer.text = fuelUp.odometer.toString()
         holder.txtDate.text = fuelUp.formatInputDate()
         holder.txtPrice.text = "${fuelUp.calculateTotalAmount()} ${fuelUp.getCurrency()}"

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:padding="30dp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Car Name"
+        android:text="My Car"
         android:textColor="@color/textColor"
         android:textSize="24sp" />
 
@@ -53,6 +53,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/txtAverageConsumption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"

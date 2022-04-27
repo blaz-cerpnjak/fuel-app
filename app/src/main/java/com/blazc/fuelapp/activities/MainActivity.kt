@@ -67,7 +67,6 @@ class MainActivity : AppCompatActivity() {
             return 0f
 
         var counter = 1
-        var totalDrivenDistance = 0
         var fuelAmount = 0f
         var lastOdometer = fuelUps[0].odometer
         var drivenDistance = 0
@@ -78,9 +77,8 @@ class MainActivity : AppCompatActivity() {
                 counter++
                 fuelAmount += fuelUps[i].fuelAmount
                 drivenDistance = lastOdometer - fuelUps[i].odometer
-                totalDrivenDistance += drivenDistance
                 lastOdometer = fuelUps[i].odometer
-                partialConsumption = totalDrivenDistance / fuelAmount
+                partialConsumption = (fuelAmount / drivenDistance) * 100
             }
         }
 

@@ -8,7 +8,7 @@ import kotlin.math.roundToInt
 
 class FuelUp (var odometer: Int, var fuelAmount: Float, var pricePerUnit: Float,
               var inputDate: String, var comment: String, var isPartial: Int,
-              var vehicleID: Int = -1, var ID: Int = -1) {
+              var avgConsumption: Float = 0f, var vehicleID: Int = -1, var ID: Int = -1) {
 
     fun calculateTotalAmount(): Float {
         var totalAmount = fuelAmount * pricePerUnit

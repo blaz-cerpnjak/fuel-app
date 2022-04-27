@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.blazc.fuelapp.DatabaseHelper
 import com.blazc.fuelapp.activities.MainActivity
@@ -35,6 +36,7 @@ class HomeFragment : Fragment() {
         mydb = DatabaseHelper(mainActivity)
         binding.txtMonthlyExpenses.text = "${getCurrentMonthsExpenses()} ${mainActivity.getCurrency()}"
         binding.txtDistance.text = mydb.getCurrentMonthsDistance().toString()
+        binding.txtAverageConsumption.text = mainActivity.totalAverageConsumption().toString()
     }
 
     fun getCurrentMonthsExpenses(): Float {

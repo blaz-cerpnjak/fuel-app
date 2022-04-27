@@ -9,6 +9,7 @@ import com.blazc.fuelapp.helper.FuelUp
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.math.roundToInt
 
 private const val FUEL_UP = "FUEL_UP"
 private const val VEHICLE = "VEHICLE"
@@ -82,7 +83,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             val isPartial = cursor.getInt(cursor.getColumnIndex("IS_PARTIAL"))
             val comment = cursor.getString(cursor.getColumnIndex("COMMENT"))
             val vehicleID = cursor.getInt(cursor.getColumnIndex("VEHICLE_ID"))
-            fuelUp = FuelUp(odometer, fuelAmount, pricePerUnit, date, comment, isPartial, vehicleID, id)
+            fuelUp = FuelUp(odometer, fuelAmount, pricePerUnit, date, comment, isPartial, 0f, vehicleID, id)
             cursor.moveToNext()
         }
         cursor.close()
@@ -95,6 +96,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val db = readableDatabase
         val cursor = db.rawQuery("SELECT * FROM $FUEL_UP", null)
         cursor.moveToFirst()
+        var lastOdometer = 0
+        var lastFuelAmount = 0f
         while (!cursor.isAfterLast) {
             val id = cursor.getInt(cursor.getColumnIndex("ID"))
             val odometer = cursor.getInt(cursor.getColumnIndex("CURRENT_ODOMETER"))
@@ -104,11 +107,21 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             val isPartial = cursor.getInt(cursor.getColumnIndex("IS_PARTIAL"))
             val comment = cursor.getString(cursor.getColumnIndex("COMMENT"))
             val vehicleID = cursor.getInt(cursor.getColumnIndex("VEHICLE_ID"))
-            fuelUpList.add(FuelUp(odometer, fuelAmount, pricePerUnit, date, comment, isPartial, vehicleID, id))
+            val avgConsumption = calcAvgConsumption(lastOdometer, odometer, fuelAmount)
+            fuelUpList.add(FuelUp(odometer, fuelAmount, pricePerUnit, date, comment, isPartial, avgConsumption, vehicleID, id))
+            lastOdometer = odometer
             cursor.moveToNext()
         }
         cursor.close()
         return fuelUpList
+    }
+
+    private fun calcAvgConsumption(lastOdometer: Int, currentOdometer: Int, fuelAmount: Float): Float {
+        if (fuelAmount <= 0 || lastOdometer <= 0)
+            return 0f
+        val drivenDistance = currentOdometer - lastOdometer
+        val avgConsumption = (fuelAmount / drivenDistance) * 100
+        return ((avgConsumption * 100.0).roundToInt() / 100.0).toFloat()
     }
 
     fun deleteFuelUp(id: Int): Int {
@@ -172,6 +185,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val db = readableDatabase
         val cursor = db.rawQuery("SELECT * FROM $FUEL_UP", null)
         cursor.moveToFirst()
+        var lastOdometer = 0
         while (!cursor.isAfterLast) {
             val date = cursor.getString(cursor.getColumnIndex("DATE"))
             val dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
@@ -185,8 +199,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 val isPartial = cursor.getInt(cursor.getColumnIndex("IS_PARTIAL"))
                 val comment = cursor.getString(cursor.getColumnIndex("COMMENT"))
                 val vehicleID = cursor.getInt(cursor.getColumnIndex("VEHICLE_ID"))
+                val avgConsumption = calcAvgConsumption(lastOdometer, odometer, fuelAmount)
+                lastOdometer = odometer
 
-                fuelUpList.add(FuelUp(odometer, fuelAmount, pricePerUnit, date, comment, isPartial, vehicleID, id))
+                fuelUpList.add(FuelUp(odometer, fuelAmount, pricePerUnit, date, comment, isPartial, avgConsumption, vehicleID, id))
             }
 
             cursor.moveToNext()
