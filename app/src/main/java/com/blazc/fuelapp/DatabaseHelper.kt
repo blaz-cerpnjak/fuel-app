@@ -211,4 +211,36 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return fuelUpList
     }
 
+    @SuppressLint("Range")
+    fun getCurrentYearFuelUps(): List<FuelUp> {
+        val fuelUpList = mutableListOf<FuelUp>()
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $FUEL_UP", null)
+        cursor.moveToFirst()
+        var lastOdometer = 0
+        while (!cursor.isAfterLast) {
+            val date = cursor.getString(cursor.getColumnIndex("DATE"))
+            val dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+            val parsedDate = LocalDate.parse(date, dtf)
+
+            if (parsedDate.year == LocalDate.now().year) {
+                val id = cursor.getInt(cursor.getColumnIndex("ID"))
+                val odometer = cursor.getInt(cursor.getColumnIndex("CURRENT_ODOMETER"))
+                val fuelAmount = cursor.getFloat(cursor.getColumnIndex("FUEL_AMOUNT"))
+                val pricePerUnit = cursor.getFloat(cursor.getColumnIndex("PRICE_PER_UNIT"))
+                val isPartial = cursor.getInt(cursor.getColumnIndex("IS_PARTIAL"))
+                val comment = cursor.getString(cursor.getColumnIndex("COMMENT"))
+                val vehicleID = cursor.getInt(cursor.getColumnIndex("VEHICLE_ID"))
+                val avgConsumption = calcAvgConsumption(lastOdometer, odometer, fuelAmount)
+                lastOdometer = odometer
+
+                fuelUpList.add(FuelUp(odometer, fuelAmount, pricePerUnit, date, comment, isPartial, avgConsumption, vehicleID, id))
+            }
+
+            cursor.moveToNext()
+        }
+        cursor.close()
+        return fuelUpList
+    }
+
 }
