@@ -34,23 +34,5 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mainActivity = activity as MainActivity
-        setRecyclerViewFuelUps()
-    }
-
-    private fun setRecyclerViewFuelUps() {
-        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true)
-        binding.recyclerViewFuelUps.layoutManager = linearLayoutManager
-        val fuelUpList = getFuelUpList()
-        fuelUpAdapter = FuelUpAdapter(mainActivity, fuelUpList)
-        binding.recyclerViewFuelUps.adapter = fuelUpAdapter
-        fuelUpAdapter.setOnItemClickListener(object : FuelUpAdapter.OnItemClickListener {
-            override fun onItemClick(position: Int) {
-                mainActivity.loadFragment(FuelUpFragment(fuelUpList[position].ID, true))
-            }
-        })
-    }
-
-    private fun getFuelUpList(): List<FuelUp> {
-        return mainActivity.mydb.getFuelUps()
     }
 }

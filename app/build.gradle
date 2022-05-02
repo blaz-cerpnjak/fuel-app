@@ -49,4 +49,6 @@ dependencies {
     implementation  'io.ak1:bubbletabbar:1.0.8'
     // MotionToast
     implementation 'com.github.Spikeysanju:MotionToast:1.4'
+    // MPAndroidChart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

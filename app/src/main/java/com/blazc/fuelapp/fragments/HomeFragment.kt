@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.blazc.fuelapp.DatabaseHelper
 import com.blazc.fuelapp.activities.MainActivity
+import com.blazc.fuelapp.adapters.FuelUpAdapter
 import com.blazc.fuelapp.databinding.FragmentHomeBinding
+import com.blazc.fuelapp.helper.FuelUp
 import kotlin.math.roundToInt
 
 class HomeFragment : Fragment() {
@@ -16,6 +19,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var mainActivity: MainActivity
     private lateinit var mydb: DatabaseHelper
+    private lateinit var fuelUpAdapter: FuelUpAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +38,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         mainActivity = activity as MainActivity
         mydb = DatabaseHelper(mainActivity)
+        setRecyclerViewFuelUps()
         binding.txtMonthlyExpenses.text = "${getCurrentMonthsExpenses()} ${mainActivity.getCurrency()}"
         binding.txtDistance.text = mydb.getCurrentMonthsDistance().toString()
         binding.txtAverageConsumption.text = mainActivity.totalAverageConsumption().toString()
@@ -50,4 +55,22 @@ class HomeFragment : Fragment() {
         return ((sum * 100.0).roundToInt() / 100.0).toFloat()
     }
 
+    //region RecyclerView
+    private fun setRecyclerViewFuelUps() {
+        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true)
+        binding.recyclerViewFuelUps.layoutManager = linearLayoutManager
+        val fuelUpList = getFuelUpList()
+        fuelUpAdapter = FuelUpAdapter(mainActivity, fuelUpList)
+        binding.recyclerViewFuelUps.adapter = fuelUpAdapter
+        fuelUpAdapter.setOnItemClickListener(object : FuelUpAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                mainActivity.loadFragment(FuelUpFragment(fuelUpList[position].ID, true))
+            }
+        })
+    }
+
+    private fun getFuelUpList(): List<FuelUp> {
+        return mainActivity.mydb.getFuelUps()
+    }
+    //endregion
 }
