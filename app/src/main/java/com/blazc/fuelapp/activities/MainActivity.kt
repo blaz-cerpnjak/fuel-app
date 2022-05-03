@@ -90,5 +90,31 @@ class MainActivity : AppCompatActivity() {
 
         return ((avgConsumption * 100.0).roundToInt() / 100.0).toFloat()
     }
+
+    fun avgFuelCostPerUnit(): Float {
+        val fuelUps = mydb.getFuelUps().sortedByDescending { it.ID }
+
+        if (fuelUps.size < 2)
+            return 0f
+
+        var lastOdometer = fuelUps[0].odometer
+        var drivenDistance = 0
+        var priceAmount = fuelUps[0].pricePerUnit * fuelUps[0].fuelAmount
+
+        for (i in 1 until fuelUps.size) {
+            drivenDistance += lastOdometer - fuelUps[i].odometer
+            lastOdometer = fuelUps[i].odometer
+            priceAmount += fuelUps[i].pricePerUnit * fuelUps[i].fuelAmount
+        }
+
+        if (drivenDistance <= 0 || priceAmount <= 0)
+            return 0f
+
+        val avgFuelCostPerUnit = priceAmount / drivenDistance
+
+        return ((avgFuelCostPerUnit * 100.0).roundToInt() / 100.0).toFloat()
+    }
+
+
     //endregion
 }
