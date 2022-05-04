@@ -23,6 +23,11 @@ class FuelUp (var odometer: Int, var fuelAmount: Float, var pricePerUnit: Float,
         return dateFormat.format(date)
     }
 
+    fun localDate(): LocalDate {
+        val dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+        return LocalDate.parse(inputDate, dtf)
+    }
+
     fun getCurrency(): String {
         return Currency.getInstance(Locale.getDefault()).getSymbol(Locale.getDefault())
     }

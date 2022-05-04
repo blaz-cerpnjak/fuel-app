@@ -42,6 +42,7 @@ class HomeFragment : Fragment() {
         binding.txtMonthlyExpenses.text = "${getCurrentMonthsExpenses()} ${mainActivity.getCurrency()}"
         binding.txtDistance.text = mydb.getCurrentMonthsDistance().toString()
         binding.txtAverageConsumption.text = mainActivity.totalAverageConsumption().toString()
+        binding.txtAvgCostPerUnit.text = mainActivity.avgFuelCostPerUnit().toString()
     }
 
     fun getCurrentMonthsExpenses(): Float {
