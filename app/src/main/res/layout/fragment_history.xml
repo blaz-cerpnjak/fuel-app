@@ -20,6 +20,54 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/rounded_light_gray"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnWeek"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/little_rounded_green"
+            android:textColor="#fff"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_margin="2dp"
+            android:textAllCaps="false"
+            android:text="Week"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnMonth"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:textColor="#fff"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_margin="2dp"
+            android:textAllCaps="false"
+            android:text="Month"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnYear"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:textColor="#fff"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_margin="2dp"
+            android:textAllCaps="false"
+            android:text="Year"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"

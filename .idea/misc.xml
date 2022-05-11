@@ -13,6 +13,7 @@
         <entry key="app/src/main/res/drawable/rounded_light_gray.xml" value="0.257" />
         <entry key="app/src/main/res/drawable/rounded_light_green.xml" value="0.257" />
         <entry key="app/src/main/res/layout/fragment_fuel_up.xml" value="0.32708333333333334" />
+        <entry key="app/src/main/res/layout/fragment_history.xml" value="0.32708333333333334" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3265625" />
       </map>
     </option>
