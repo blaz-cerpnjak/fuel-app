@@ -13,4 +13,6 @@
     <color name="blue">#028eed</color>
     <color name="textColor">#2c2c2e</color>
     <color name="red">#f02d3a</color>
+    <color name="transparent">#00000000</color>
+    <color name="lightGray">#808080</color>
 </resources>

@@ -14,7 +14,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="History"
+        android:text="@string/history"
         android:textColor="@color/textColor"
         android:textSize="24sp" />
 
@@ -29,18 +29,6 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnWeek"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:background="@drawable/little_rounded_green"
-            android:textColor="#fff"
-            android:fontFamily="@font/poppins_medium"
-            android:layout_margin="2dp"
-            android:textAllCaps="false"
-            android:text="Week"/>
-
-        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnMonth"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -50,19 +38,19 @@
             android:fontFamily="@font/poppins_medium"
             android:layout_margin="2dp"
             android:textAllCaps="false"
-            android:text="Month"/>
+            android:text="@string/month"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnYear"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:background="@color/transparent"
+            android:background="@drawable/rounded_blue"
             android:textColor="#fff"
             android:fontFamily="@font/poppins_medium"
             android:layout_margin="2dp"
             android:textAllCaps="false"
-            android:text="Year"/>
+            android:text="@string/year"/>
 
     </LinearLayout>
 
