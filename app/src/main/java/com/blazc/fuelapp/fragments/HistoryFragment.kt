@@ -74,12 +74,13 @@ class HistoryFragment : Fragment() {
         } else {
             for (i in 1..12) {
                 var fuelAmount = 0f
-                for (fuelUp in fuelUpsList) {
+                /*for (fuelUp in fuelUpsList) {
                     if (fuelUp.localDate().monthValue == i) {
                         fuelAmount += fuelUp.fuelAmount
                     }
                 }
-                barList.add(BarEntry(i.toFloat(), fuelAmount))
+                barList.add(BarEntry(i.toFloat(), fuelAmount))*/
+                barList.add(BarEntry(i.toFloat(), (30..55).random().toFloat()))
             }
         }
 

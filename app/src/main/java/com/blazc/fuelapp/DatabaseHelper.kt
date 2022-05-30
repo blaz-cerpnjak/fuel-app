@@ -180,6 +180,33 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     @SuppressLint("Range")
+    fun getAverageMonthlyDistance(): Int {
+        var distance = 0
+        var count = 0
+        var lastOdometer: Int? = null
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $FUEL_UP", null)
+        cursor.moveToFirst()
+
+        while (!cursor.isAfterLast) {
+            val date = cursor.getString(cursor.getColumnIndex("DATE"))
+            val dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+            val parsedDate = LocalDate.parse(date, dtf)
+
+            val odometer = cursor.getInt(cursor.getColumnIndex("CURRENT_ODOMETER"))
+            if (lastOdometer != null) {
+                distance += (odometer - lastOdometer)
+            }
+            lastOdometer = odometer
+
+            count += 1
+            cursor.moveToNext()
+        }
+        cursor.close()
+        return (distance/count).toInt()
+    }
+
+    @SuppressLint("Range")
     fun getCurrentMonthsFuelUps(): List<FuelUp> {
         val fuelUpList = mutableListOf<FuelUp>()
         val db = readableDatabase

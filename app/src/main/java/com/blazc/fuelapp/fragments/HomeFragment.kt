@@ -40,7 +40,7 @@ class HomeFragment : Fragment() {
         mydb = DatabaseHelper(mainActivity)
         setRecyclerViewFuelUps()
         binding.txtMonthlyExpenses.text = "${getCurrentMonthsExpenses()} ${mainActivity.getCurrency()}"
-        binding.txtDistance.text = mydb.getCurrentMonthsDistance().toString()
+        binding.txtDistance.text = mydb.getAverageMonthlyDistance().toString()
         binding.txtAverageConsumption.text = mainActivity.totalAverageConsumption().toString()
         binding.txtAvgCostPerUnit.text = mainActivity.avgFuelCostPerUnit().toString()
     }

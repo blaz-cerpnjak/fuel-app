@@ -11,7 +11,10 @@ import com.blazc.fuelapp.databinding.ActivityMainBinding
 import com.blazc.fuelapp.fragments.FuelUpFragment
 import com.blazc.fuelapp.fragments.HistoryFragment
 import com.blazc.fuelapp.fragments.HomeFragment
+import com.blazc.fuelapp.helper.FuelUp
 import io.ak1.OnBubbleClickListener
+import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 import kotlin.math.roundToInt
 
